@@ -7,6 +7,10 @@ function setup() {
   g = 0.2;
   y = height/2-radius/2;
   v = 0;
+  setInterval(()=>{
+    let pipeLength = random(20,height-40);
+    pipes.push([width,pipeLength]);
+  },2000);
 }
 
 function draw() {
@@ -20,6 +24,7 @@ function draw() {
     background(100,200,255);
     fill(255,0,0);
     circle(width/2-35,y,radius);
+    updatePipes();
     displayPipes();
     x+=0.15;
     v+=g;
@@ -35,16 +40,18 @@ function keyPressed() {
 }
 
 function displayPipes(){
-  let pipeLength = random(20,height-40);
-  pipes.push([width,pipeLength]);
+  // let pipeLength = random(20,height-40);
+  // pipes.push([width/2,pipeLength]);
   for(let i = 0;i<pipes.length;i++){
     fill(0,255,0);
     rect(pipes[i][0],0,50,pipes[i][0]); 
-    rect(pipes[i][0],pipeLength+40,50,height-pipes[i][0]-40); 
+    rect(pipes[i][0],pipes[i][1]+40,50,height-pipes[i][1]-40); 
   }
 }
 
 function updatePipes(){
-  
+  for(let i = 0;i<pipes.length;i++){
+    pipes[i][0]--;
+  }
 }
 
